@@ -42,7 +42,7 @@ for m in list(cec_modules.keys()):
         {'label': m.replace('_', ' '), 'value': m})
 
 # Bucket for storing s3
-bucket = 'pvtools-nsrdb-pickle'
+bucket = 'pvtools'
 
 
 
@@ -131,7 +131,7 @@ def get_s3_csv(filename):
 
     # filename = '2017DesignConditions_s.xlsx.csv'
 
-    bucket = 'pvtools-nsrdb-pickle'
+    bucket = 'pvtools'
 
     # connect to AWS S3
     s3 = boto3.resource('s3')
@@ -281,7 +281,7 @@ def get_s3_npz(filename):
 
     """
 
-    bucket = 'pvtools-nsrdb-pickle'
+    bucket = 'pvtools'
 
     # connect to AWS S3
     s3 = boto3.resource('s3')
