@@ -1,31 +1,15 @@
 """
 Main page for pvtools website. Run this script to start.
 
-04/09/2019
+10/09/2023
 toddkarin
+baojie li
 
 """
 
-import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc, html, Input, Output
 import dash_bootstrap_components as dbc
-# # import dash_table
-# import plotly.colors
-# import plotly.graph_objs as go
-# # import plotly.plotly as py
-# from flask_caching import Cache
-from dash.dependencies import Input, Output, State
-# import numpy as np
-# import pvlib
-# import nsrdbtools
-# import pandas as pd
-# import uuid
-# import os
-# import flask
-# import json
-# import time
-# import datetime
+
 
 from app import app
 
@@ -33,7 +17,7 @@ from app import app
 server = app.server
 
 # Load layouts for different pages
-import home, pvcz, about, string_length_calculator, pv_climate_stressors
+import home, iv_correction_tool, about, string_length_calculator, pv_climate_stressors
 
 
 app.layout = html.Div([
@@ -51,7 +35,7 @@ header = dbc.Container([
                     style={'height': 50}),
                 href="https://www.lbl.gov/"
             )
-            ],width=4),
+            ],width=9),
         dbc.Col([
             html.A(
                 html.Img(
@@ -59,7 +43,7 @@ header = dbc.Container([
                     style={'height': 50}),
                 href="https://www.duramat.org/"
             )
-            ],width=4)
+            ],width=3)
 
         ],justify='between')
 ])
@@ -71,13 +55,11 @@ navbar = dbc.NavbarSimple(
             in_navbar=True,
             label="Tools",
             children=[
+                dbc.DropdownMenuItem("IV Curve Correction Tool",href='/iv-curve-correction-tool'),
                 dbc.DropdownMenuItem("String Length Calculator",href='/string-length-calculator'),
                 dbc.DropdownMenuItem("Photovoltaic Climate Stressors",href='/pv-climate-stressors'),
-                # dbc.DropdownMenuItem(divider=True),
-                # dbc.DropdownMenuItem("Documentation"),
             ],
         ),
-        # dbc.NavItem(dbc.NavLink("Contact", href="#")),
     ],
     brand="PVTOOLS",
     brand_href="/",
@@ -90,16 +72,13 @@ navbar = dbc.NavbarSimple(
               [Input('url', 'pathname')])
 def display_page(pathname):
     if pathname == '/string-length-calculator':
-        # body = pvcz.layout
         body = string_length_calculator.layout
-    elif pathname == '/pvcz':
-        body = pvcz.layout
-    elif pathname == '/about':
-        body = about.layout
     elif pathname == '/home':
         body = home.layout
     elif pathname == '/pv-climate-stressors':
         body = pv_climate_stressors.layout
+    elif pathname == '/iv-curve-correction-tool':
+        body = iv_correction_tool.layout
     elif pathname == '/':
         body = home.layout
     else:
