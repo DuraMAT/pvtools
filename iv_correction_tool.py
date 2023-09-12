@@ -53,7 +53,7 @@ layout = dbc.Container([
                 [https://github.com/DuraMAT/IVcorrection](https://github.com/DuraMAT/IVcorrection).
 
                 **We would highly appreciate any feedback** (praise, bug reports, 
-                suggestions, etc.). Please contact us at baojieli@lbl.gov. 
+                suggestions, etc.). Please contact us at pvtools.duramat@gmail.com. 
                 
                 """.replace('    ', '')
                  ),
@@ -127,7 +127,7 @@ layout = dbc.Container([
 
     dbc.Card([
         dbc.CardBody([
-            dbc.Label("""To select module parameters from a library of common 
+            dcc.Markdown("""To select module parameters from a library of common 
             modules (CEC database \[2\]), select 'Library Lookup'. Or select 'manual entry' to 
             enter the parameters manually. 
             
@@ -537,7 +537,7 @@ layout = dbc.Container([
         Laboratory is funded by the DOE under award DE-AC02-05CH11231 """),
         html.P('ivcorrection version ' + str(ivcorrectionlib.__version__)), 
         html.P('Author: Baojie Li'),
-        html.P('Contact: ' + str(ivcorrectionlib.contact_email))
+        html.P('Contact: ' + ivcorrectionlib.contact_email)
     ])
 ])
 
