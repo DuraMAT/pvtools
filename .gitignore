@@ -118,3 +118,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# credential
+list_s3_file.py
+upload01_send_files_to_aws.py
+upload02_try_getting_files.py
+upload03_add_extra.py
