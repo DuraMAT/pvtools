@@ -17,7 +17,8 @@ from app import app
 server = app.server
 
 # Load layouts for different pages
-import home, iv_correction_tool, about, string_length_calculator, pv_climate_stressors
+import home, iv_correction_tool, about
+# import string_length_calculator, pv_climate_stressors
 
 
 app.layout = html.Div([
@@ -72,11 +73,13 @@ navbar = dbc.NavbarSimple(
               [Input('url', 'pathname')])
 def display_page(pathname):
     if pathname == '/string-length-calculator':
-        body = string_length_calculator.layout
+        # body = string_length_calculator.layout
+        body = home.layout
     elif pathname == '/home':
         body = home.layout
     elif pathname == '/pv-climate-stressors':
-        body = pv_climate_stressors.layout
+        # body = pv_climate_stressors.layout
+        body = home.layout
     elif pathname == '/iv-curve-correction-tool':
         body = iv_correction_tool.layout
     elif pathname == '/':
