@@ -138,13 +138,13 @@ layout = dbc.Container([
                         dbc.CardBody([
                             html.H6("Module name (from CEC database)"),
                             dcc.Dropdown(
-                                    id='module_name',
+                                    id='module_name_select',
                                     options=cec_module_dropdown_list,
                                     value=cec_module_dropdown_list[0][
                                         'value'],
                                     style={'max-width': 500}
                                 ),
-                            dcc.Loading(html.Div(id='module_name_iv'))
+                            dcc.Loading(html.Div(id='figure_iv_datasheet'))
                         ])
                     )
                 ], tab_id='lookup', label='Library Lookup'),
@@ -270,7 +270,7 @@ layout = dbc.Container([
 
             html.P(''),
 
-            dbc.Button(id='submit-button',
+            dbc.Button(id='calc-button',
                     n_clicks=0,
                     children='Calculate',
                     color="secondary"),
@@ -541,8 +541,8 @@ layout = dbc.Container([
     ])
 ])
 
-@app.callback(Output('module_name_iv', 'children'),
-              [Input('module_name', 'value')])
+@app.callback(Output('figure_iv_datasheet', 'children'),
+              [Input('module_name_select', 'value')])
 
 def plot_lookup_IV(module_name):
     """
@@ -668,10 +668,10 @@ def plot_lookup_IV(module_name):
  
 @app.callback([Output('coefficents', 'children'),
                Output('results-store', 'data')],
-              [Input('submit-button', 'n_clicks')
+              [Input('calc-button', 'n_clicks')
                ],
               [State('module_parameter_input_type', 'active_tab'),
-               State('module_name', 'value'),
+               State('module_name_select', 'value'),
                State('module_name_manual', 'value'),
                State('v_oc_ref', 'value'),
                State('i_sc_ref', 'value'),

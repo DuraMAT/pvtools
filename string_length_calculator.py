@@ -10,9 +10,7 @@ toddkarin
 
 """
 
-import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dash, html, dcc
 import dash_bootstrap_components as dbc
 from dash.exceptions import PreventUpdate
 # import dash_table
@@ -992,9 +990,10 @@ layout = dbc.Container([
 
 
 @app.callback(
-    Output("details-collapse", "is_open"),
+    Output("details-collapse", "is_open", allow_duplicate=True),
     [Input("details-button", "n_clicks")],
     [State("details-collapse", "is_open")],
+    prevent_initial_call='initial_duplicate'
 )
 def toggle_collapse(n, is_open):
     if n:
@@ -1512,9 +1511,9 @@ def make_iv_summary_layout(module_parameters):
     ]
 
 
-@app.callback(Output('module_name_iv', 'children'),
-              [Input('module_name', 'value')
-               ])
+@app.callback(Output('module_name_iv', 'children', allow_duplicate=True),
+              Input('module_name', 'value'),
+              prevent_initial_call='initial_duplicate')
 def plot_lookup_IV(module_name):
     """
     Callback for IV curve plotting in setting module parameters.
@@ -1669,7 +1668,7 @@ def get_weather_data(lat, lon):
 
 
 @app.callback([Output('graphs', 'children'),
-               Output('results-store', 'data'),
+               Output('results-store', 'data', allow_duplicate=True),
                # Output('voc-hist-results-store', 'children'),
                ],
               [Input('submit-button', 'n_clicks')
@@ -1710,7 +1709,8 @@ def get_weather_data(lat, lon):
                State('single_axis_albedo', 'value'),
                State('fixed_tilt_backside_irradiance_fraction', 'value'),
                State('single_axis_backside_irradiance_fraction', 'value'),
-               ]
+               ],
+               prevent_initial_call='initial_duplicate'
               )
 def run_simulation(n_clicks, lat, lon, module_parameter_input_type, module_name,
                    module_name_manual,
